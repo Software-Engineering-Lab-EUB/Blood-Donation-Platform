@@ -1,5 +1,6 @@
 import Image from "next/image";
 import banner from "../../../../public/images/banner/banner.jpg";
+import Link from "next/link";
 
 export default function Banner() {
   return (
@@ -19,8 +20,8 @@ export default function Banner() {
           </p>
         </div>
         <div className="flex gap-4 my-4">
-          <button className="btn btn-ghost primary-btn">Donate Blood</button>
-          <button className="btn btn-ghost primary-btn">Request Blood</button>
+          <Link href="/donate" className="btn btn-ghost primary-btn">Donate Blood</Link>
+          <Link href="/request" className="btn btn-ghost primary-btn">Request Blood</Link>
         </div>
       </div>
     </div>
