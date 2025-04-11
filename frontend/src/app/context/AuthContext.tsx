@@ -43,7 +43,7 @@ const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   // onAuth state change handler
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, async (currentUser:any) => {
+    const unSubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser as any);
       setLoading(false);
 
