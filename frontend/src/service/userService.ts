@@ -1,6 +1,5 @@
 import { serverBaseUrl } from "@/app/utils/serverUrl";
 
-
 //update users details
 export const updateUserProfile = async (id: string, updatedInfo: any) => {
   const response = await fetch(`${serverBaseUrl}/user/update/${id}`, {
