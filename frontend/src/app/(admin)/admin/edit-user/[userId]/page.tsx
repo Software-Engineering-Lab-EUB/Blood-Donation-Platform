@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import { getUserDetails } from "../../services/userService";
 
-// Define proper TypeScript interface for user data
+//User Interface//
 interface UserData {
   name: string;
   blood_group: string;
