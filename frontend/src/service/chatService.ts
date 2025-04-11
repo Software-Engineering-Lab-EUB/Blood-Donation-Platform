@@ -1,4 +1,5 @@
-import { serverBaseUrl } from "@/utils/serverUrl";
+import { serverBaseUrl } from "@/app/utils/serverUrl";
+
 
 //get chat lists
 export const getUsersChatLists = async (email: string) => {
