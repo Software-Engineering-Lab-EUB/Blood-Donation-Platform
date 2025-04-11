@@ -1,19 +1,111 @@
 @import "tailwindcss";
+@plugin "daisyui";
 
 @theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
-
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
+/* customized styles */
+.text-primary{
+  color:#f7344b;
+}
+.text-secondary{
+  color:#72808b;
+}
+.text-soft-red{
+  color:#f04c4b;
+}
+.primary-btn {
+  background: linear-gradient(135deg, #e63946, #ff6b81); /* Red to Pink Gradient */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0px 4px 8px rgba(230, 57, 70, 0.3); /* Soft red shadow */
+  
+  text-align: center;
+}
+
+.primary-btn:hover {
+  background: linear-gradient(135deg, #d62839, #ff3b5c); /* Darker gradient on hover */
+  transform: translateY(-2px) scale(1.05); 
+  box-shadow: 0px 6px 12px rgba(230, 57, 70, 0.4);
+}
+
+.primary-btn:active {
+  transform: translateY(1px) scale(0.98); /* Press effect */
+}
+
+
+/* Disabled state */
+.primary-btn:disabled {
+  background-color: #F44336; /* Lighter red for disabled */
+  opacity: 0.6; /* Reduce opacity */
+  cursor: not-allowed;
+}
+/* nav links styles */
+.nav-link {
+  color: #564f4f; 
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 10px 10px;
+  border-radius: 6px;
+  transition: all 0.3s ease-in-out;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: #e63946; /* Red text on hover */
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #e63946, #ff6b81); /* Red to Pink Underline */
+  transition: all 0.3s ease-in-out;
+  transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+
+/*  customized checkbox styles */
+
+.customized-checkbox {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 2px solid #d1d5db;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: white;
+  position: relative;
+}
+
+.customized-checkbox:checked {
+   background-color: #d34747; 
+}
+
 
 @media (prefers-color-scheme: light) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff; 
+    --foreground: #000000; 
   }
 }
 
