@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
-
+import AuthProvider from "@/context/AuthContext";
+import SocketProvider from "@/context/SocketProvider";
 
 const roboto = Roboto({
   weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
@@ -20,9 +21,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-theme="light">
       <body className={`${roboto.className} antialiased`}>
-       {children}
+        <AuthProvider>
+          <SocketProvider>{children}</SocketProvider>
+        </AuthProvider>
       </body>
     </html>
   );
