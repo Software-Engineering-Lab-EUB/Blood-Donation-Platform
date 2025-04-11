@@ -3,9 +3,10 @@
 import { useContext, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { registerNewUser } from "@/service/authService";
-import { successMessage } from "@/utils/alertMessages";
-import { AuthContext } from "@/context/AuthContext";
+;
 import { getUsersProfileInfo } from "@/service/userService";
+import { AuthContext } from "@/app/context/AuthContext";
+import { successMessage } from "@/app/utils/alertMessages";
 
 export default function Register() {
   const router = useRouter();

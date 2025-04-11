@@ -1,6 +1,6 @@
 "use client";
 
-import { AuthContext } from "@/context/AuthContext";
+import { AuthContext } from "@/app/context/AuthContext";
 import { getAdditionalUserInfo } from "firebase/auth";
 import Image from "next/image";
 import { useRouter } from "next/navigation";

@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "@/context/AuthContext";
+
 import { getUserInfoByEmail, updateUserProfile } from "@/service/userService";
 import { useRouter } from "next/navigation";
 import {
@@ -15,6 +15,7 @@ import {
   X,
   AlertCircle,
 } from "lucide-react";
+import { AuthContext } from "@/app/context/AuthContext";
 
 export default function EditProfile() {
   const authContext = useContext(AuthContext);

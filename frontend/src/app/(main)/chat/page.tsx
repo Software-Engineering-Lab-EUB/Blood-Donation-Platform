@@ -1,9 +1,9 @@
 "use client";
-import { AuthContext } from "@/context/AuthContext";
 import { getUsersChatLists } from "@/service/chatService";
 import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
+import { AuthContext } from "@/app/context/AuthContext";
 
 interface ChatInfo {
   roomId: string;

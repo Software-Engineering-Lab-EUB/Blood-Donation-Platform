@@ -4,7 +4,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Cookies from "js-cookie";
-import { createRoom } from "@/utils/chatRoomGenerate";
+import { createRoom } from "@/app/utils/chatRoomGenerate";
 
 
 //user interface 
