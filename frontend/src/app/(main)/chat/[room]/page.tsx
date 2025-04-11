@@ -2,7 +2,7 @@
 import Cookies from "js-cookie";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState, useRef } from "react";
-import { useSocket } from "@/context/SocketProvider";
+
 import {
   addNewMessage,
   getRoomChatHistory,
@@ -10,6 +10,7 @@ import {
 } from "@/service/chatService";
 import Link from "next/link";
 import { getUsersProfileInfo } from "@/service/userService";
+import { useSocket } from "@/app/context/SocketProvider";
 
 export default function Chat() {
   const router = useRouter();
