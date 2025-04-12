@@ -44,7 +44,7 @@ export default function Navbar() {
    fetchUnreadCount();
 
 
-   const interval = setInterval(fetchUnreadCount, 10000);
+   const interval = setInterval(fetchUnreadCount, 3000);
 
    if (socket) {
      socket.on("new-message-alert", fetchUnreadCount);
