@@ -13,7 +13,8 @@ import {
   ChevronDown,
 } from "lucide-react";
 import { postAppointmentRequest } from "@/service/appointmentService";
-import { successMessage } from "@/app/utils/alertMessages";
+import { successMessage } from "@/utils/alertMessages";
+
 
 
 const bloodGroups = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];

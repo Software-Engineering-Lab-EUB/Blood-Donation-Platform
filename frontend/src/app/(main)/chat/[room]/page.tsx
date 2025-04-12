@@ -10,7 +10,7 @@ import {
 } from "@/service/chatService";
 import Link from "next/link";
 import { getUsersProfileInfo } from "@/service/userService";
-import { useSocket } from "@/app/context/SocketProvider";
+import { useSocket } from "@/context/SocketProvider";
 
 export default function Chat() {
   const router = useRouter();

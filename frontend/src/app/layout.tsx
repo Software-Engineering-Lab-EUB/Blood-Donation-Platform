@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
-import AuthProvider from "./context/AuthContext";
-import SocketProvider from "./context/SocketProvider";
+import AuthProvider from "@/context/AuthContext";
+import SocketProvider from "@/context/SocketProvider";
+
 
 
 const roboto = Roboto({

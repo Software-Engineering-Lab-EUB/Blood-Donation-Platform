@@ -5,8 +5,9 @@ import { useRouter } from "next/navigation";
 import { registerNewUser } from "@/service/authService";
 ;
 import { getUsersProfileInfo } from "@/service/userService";
-import { AuthContext } from "@/app/context/AuthContext";
-import { successMessage } from "@/app/utils/alertMessages";
+import { AuthContext } from "@/context/AuthContext";
+import { successMessage } from "@/utils/alertMessages";
+
 
 export default function Register() {
   const router = useRouter();

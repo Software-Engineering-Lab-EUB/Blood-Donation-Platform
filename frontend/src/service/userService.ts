@@ -1,4 +1,5 @@
-import { serverBaseUrl } from "@/app/utils/serverUrl";
+import { serverBaseUrl } from "@/utils/serverUrl";
+
 
 //update users details
 export const updateUserProfile = async (id: string, updatedInfo: any) => {

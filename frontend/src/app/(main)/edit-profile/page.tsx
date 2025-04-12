@@ -15,7 +15,8 @@ import {
   X,
   AlertCircle,
 } from "lucide-react";
-import { AuthContext } from "@/app/context/AuthContext";
+import { AuthContext } from "@/context/AuthContext";
+
 
 export default function EditProfile() {
   const authContext = useContext(AuthContext);

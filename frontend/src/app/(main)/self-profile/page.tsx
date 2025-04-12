@@ -4,7 +4,7 @@
 import { getUserInfoByEmail } from "@/service/userService";
 import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
-import { AuthContext } from "@/app/context/AuthContext";
+import { AuthContext } from "@/context/AuthContext";
 
 export default function SelfProfile() {
   const authContext = useContext(AuthContext);

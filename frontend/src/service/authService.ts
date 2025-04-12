@@ -1,5 +1,5 @@
 
-import { serverBaseUrl } from "@/app/utils/serverUrl";
+import { serverBaseUrl } from "@/utils/serverUrl";
 import Cookies from "js-cookie";
 
 //register new user

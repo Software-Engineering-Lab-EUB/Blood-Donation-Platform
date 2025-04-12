@@ -6,8 +6,9 @@ import Image from "next/image";
 import NavbarSkeleton from "../skeletons/NavbarSkeleton";
 import Cookies from "js-cookie";
 import { getUnreadMessagesCount } from "@/service/chatService";
-import { AuthContext } from "@/app/context/AuthContext";
-import { useSocket } from "@/app/context/SocketProvider";
+import { AuthContext } from "@/context/AuthContext";
+import { useSocket } from "@/context/SocketProvider";
+
 
 export default function Navbar() {
   const authContext = useContext(AuthContext);
