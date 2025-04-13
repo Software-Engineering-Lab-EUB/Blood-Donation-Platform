@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect } from "react";
@@ -18,6 +17,7 @@ import {
   X,
 } from "lucide-react";
 import Link from "next/link";
+import Cookies from "js-cookie";
 
 //  types 
 interface BloodBank {
@@ -30,12 +30,7 @@ interface BloodBank {
 
 interface Post {
   _id: string;
-  user: {
-    _id: string;
-    name: string;
-    email: string;
-    profileImage?: string;
-  };
+  user: any;
   patientName: string;
   patientAge: number;
   gender: "Male" | "Female" | "Others";
@@ -54,6 +49,7 @@ export default function Donate() {
   const [searchTerm, setSearchTerm] = useState("");
   const [bloodGroupFilter, setBloodGroupFilter] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
+  const selfId = Cookies.get("selfId");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -116,11 +112,6 @@ export default function Donate() {
     });
   };
 
-  // Navigate to chat 
-  const handleChatClick = (userId: string) => {
-    console.log(`Navigate to chat with user ${userId}`);
-
-  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -274,7 +265,7 @@ export default function Donate() {
                         Registration ID: {bank.registration_id}
                       </p>
                       <button className="w-full bg-red-600 text-white py-2 rounded-md hover:bg-red-700 transition-colors">
-                       Contact
+                        Contact
                       </button>
                     </div>
                   </div>
@@ -333,19 +324,24 @@ export default function Donate() {
                           {post.notes}
                         </p>
                       )}
-                      <div className="flex gap-2 mt-4">
-                        <Link href={`/user-profile/${post?.user}`} className="flex-1 bg-red-600 text-white py-2 rounded-md hover:bg-red-700 transition-colors flex items-center justify-center gap-1">
-                          <User size={16} />
-                          Profile
-                        </Link>
-                        <button
-                          onClick={() => handleChatClick(post.user._id)}
-                          className="flex-1 cursor-pointer bg-white border border-red-600 text-red-600 py-2 rounded-md hover:bg-red-50 transition-colors flex items-center justify-center gap-1"
-                        >
-                          <MessageCircle size={16} />
-                          Chat
-                        </button>
-                      </div>
+                      {post?.user !== selfId && (
+                        <div className="flex gap-2 mt-4">
+                          <Link
+                            href={`/user-profile/${post?.user}`}
+                            className="flex-1 bg-red-600 text-white py-2 rounded-md hover:bg-red-700 transition-colors flex items-center justify-center gap-1"
+                          >
+                            <User size={16} />
+                            Profile
+                          </Link>
+                          <Link
+                            href={`/chat/${post?.user}`}
+                            className="flex-1 cursor-pointer bg-white border border-red-600 text-red-600 py-2 rounded-md hover:bg-red-50 transition-colors flex items-center justify-center gap-1"
+                          >
+                            <MessageCircle size={16} />
+                            Chat
+                          </Link>
+                        </div>
+                      )}
                     </div>
                   </div>
                 ))
