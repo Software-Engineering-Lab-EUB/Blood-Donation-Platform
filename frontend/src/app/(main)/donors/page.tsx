@@ -15,6 +15,7 @@ import {
   CheckCircle,
 } from "lucide-react";
 import Link from "next/link";
+import Cookies from "js-cookie";
 
 interface DateOfBirth {
   day: number;
@@ -67,6 +68,7 @@ export default function Search() {
   const [isFilterOpen, setIsFilterOpen] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const selfId = Cookies.get("selfId");
 
   const bloodGroups: string[] = [
     "A+",
@@ -84,8 +86,9 @@ export default function Search() {
       try {
         setLoading(true);
         const res = await getDonorsLists();
-        setUsers(res);
-        setFilteredUsers(res);
+        const filterRes = res.filter((user: UserData) => user._id != selfId);
+        setUsers(filterRes);
+        setFilteredUsers(filterRes);
       } catch (error) {
         console.error("Error fetching donors:", error);
       } finally {
