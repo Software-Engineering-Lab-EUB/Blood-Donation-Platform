@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
 import { AuthContext } from "@/context/AuthContext";
+import withAuth from "@/lib/hoc/withAuth";
 
 interface ChatInfo {
   roomId: string;
@@ -14,7 +15,7 @@ interface ChatInfo {
   ownMessage: boolean;
 }
 
-export default function ChatPage() {
+function ChatPage() {
   const authContext = useContext(AuthContext);
   if (!authContext) {
     throw new Error("AuthContext is not provided.");
@@ -222,3 +223,5 @@ export default function ChatPage() {
     </div>
   );
 }
+
+export default withAuth(ChatPage);
