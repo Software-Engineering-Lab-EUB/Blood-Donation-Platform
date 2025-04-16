@@ -14,12 +14,12 @@ import {
 } from "lucide-react";
 import { postAppointmentRequest } from "@/service/appointmentService";
 import { successMessage } from "@/utils/alertMessages";
+import withAuth from "@/lib/hoc/withAuth";
 
 
 
 const bloodGroups = ["A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-"];
-
-export default function ScheduleAppointment() {
+function ScheduleAppointment() {
   const { donor } = useParams();
   const [formData, setFormData] = useState({
     patientName: "",
@@ -279,3 +279,5 @@ export default function ScheduleAppointment() {
     </div>
   );
 }
+
+export default withAuth(ScheduleAppointment);

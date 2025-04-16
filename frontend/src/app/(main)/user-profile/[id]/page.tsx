@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Cookies from "js-cookie";
 import { createRoom } from "@/utils/chatRoomGenerate";
+import withAuth from "@/lib/hoc/withAuth";
+
 
 
 //user interface 
@@ -38,7 +40,7 @@ interface UserInfo {
   __v: number;
 }
 
-export default function UserProfile() {
+function UserProfile() {
   const { id } = useParams();
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -585,7 +587,6 @@ export default function UserProfile() {
               </h2>
             </div>
             <div className="p-6">
-              {/* Posts content would go here */}
               <p className="text-gray-500">
                 This user has {userInfo.posts.length} posts
               </p>
@@ -596,3 +597,6 @@ export default function UserProfile() {
     </div>
   );
 }
+
+
+export default withAuth(UserProfile);

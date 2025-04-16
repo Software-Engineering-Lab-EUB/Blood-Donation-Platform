@@ -1,5 +1,6 @@
 "use client";
 
+import withAuth from "@/lib/hoc/withAuth";
 import {
   updateAppointmentStatus,
   viewAppointments,
@@ -24,7 +25,7 @@ interface Appointment {
   isDeleted: boolean;
 }
 
-export default function ViewAppointments() {
+function ViewAppointments() {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [selfId, setSelfId] = useState<any>(null);
   const [filterStatus, setFilterStatus] = useState("All");
@@ -360,3 +361,5 @@ export default function ViewAppointments() {
     </div>
   );
 }
+
+export default withAuth(ViewAppointments);

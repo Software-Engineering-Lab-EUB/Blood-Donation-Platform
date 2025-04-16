@@ -1,4 +1,5 @@
-import { serverBaseUrl } from "@/app/utils/serverUrl";
+import { serverBaseUrl } from "@/utils/serverUrl";
+
 
 //get all blood request posts list
 export const getAllPosts = async () => {

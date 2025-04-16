@@ -11,8 +11,9 @@ import {
 import Link from "next/link";
 import { getUsersProfileInfo } from "@/service/userService";
 import { useSocket } from "@/context/SocketProvider";
+import withAuth from "@/lib/hoc/withAuth";
 
-export default function Chat() {
+function Chat() {
   const router = useRouter();
   const { room } = useParams();
   const decodedRoom = room ? decodeURIComponent(room as string) : null;
@@ -262,7 +263,7 @@ export default function Chat() {
             sender:
               data.sender ||
               (fromSelf ? "You" : chatBuddyProfile?.name || "Chat Buddy"),
-            isRead: fromSelf ? isChatBuddyInRoom : true,
+            isRead: fromSelf ? isChatBuddyInRoom : true, 
             timestamp: data.timestamp || new Date().toISOString(),
           };
 
@@ -651,3 +652,5 @@ export default function Chat() {
     </div>
   );
 }
+
+export default withAuth(Chat);

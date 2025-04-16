@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Cookies from "js-cookie";
+import withAuth from "@/lib/hoc/withAuth";
 
 //  types 
 interface BloodBank {
@@ -41,7 +42,7 @@ interface Post {
   notes?: string;
 }
 
-export default function Donate() {
+function Donate() {
   const [bloodBanks, setBloodBanks] = useState<BloodBank[]>([]);
   const [posts, setPosts] = useState<Post[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -353,3 +354,5 @@ export default function Donate() {
     </div>
   );
 }
+
+export default withAuth(Donate);

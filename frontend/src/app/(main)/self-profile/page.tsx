@@ -5,8 +5,10 @@ import { getUserInfoByEmail } from "@/service/userService";
 import { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import { AuthContext } from "@/context/AuthContext";
+import withAuth from "@/lib/hoc/withAuth";
 
-export default function SelfProfile() {
+
+function SelfProfile() {
   const authContext = useContext(AuthContext);
   const [userData, setUserData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -399,3 +401,5 @@ export default function SelfProfile() {
     </div>
   );
 }
+
+export default withAuth(SelfProfile);

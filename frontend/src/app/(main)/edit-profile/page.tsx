@@ -16,9 +16,9 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { AuthContext } from "@/context/AuthContext";
+import withAuth from "@/lib/hoc/withAuth";
 
-
-export default function EditProfile() {
+function EditProfile() {
   const authContext = useContext(AuthContext);
   const router = useRouter();
   const [userData, setUserData] = useState<any>(null);
@@ -596,3 +596,6 @@ export default function EditProfile() {
     </div>
   );
 }
+
+
+export default withAuth(EditProfile);

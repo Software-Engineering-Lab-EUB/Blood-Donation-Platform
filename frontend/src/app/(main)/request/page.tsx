@@ -12,8 +12,9 @@ import {
   Droplet,
   AlertCircle,
 } from "lucide-react";
+import withAuth from "@/lib/hoc/withAuth";
 
-export default function BloodRequestForm() {
+function BloodRequestForm() {
   const [formData, setFormData] = useState({
     patientName: "",
     patientAge: "",
@@ -353,3 +354,5 @@ export default function BloodRequestForm() {
     </div>
   );
 }
+
+export default withAuth(BloodRequestForm);
