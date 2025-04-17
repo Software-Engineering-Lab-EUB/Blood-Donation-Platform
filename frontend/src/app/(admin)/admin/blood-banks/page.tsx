@@ -1,10 +1,13 @@
-
 "use client";
 
 import React, { useState, useEffect } from "react";
-
 import { PlusCircle, Trash2, Edit, Search, X } from "lucide-react";
-import { addNewBloodBank, getAllBloodBanks } from "../services/bloodBanksService";
+import {
+  addNewBloodBank,
+  deleteBloodBank,
+  getAllBloodBanks,
+} from "../services/bloodBanksService";
+import { useRouter } from "next/navigation";
 
 const BloodBankAdminPage = () => {
   const [bloodBanks, setBloodBanks] = useState<any[]>([]);
@@ -15,8 +18,10 @@ const BloodBankAdminPage = () => {
   const [currentId, setCurrentId] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
+  const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
-  // Form state
+  // Form state for Add/Edit
   const [formData, setFormData] = useState({
     name: "",
     registration_id: "",
@@ -24,11 +29,13 @@ const BloodBankAdminPage = () => {
     contactNumber: "",
   });
 
+  const router = useRouter();
+
   useEffect(() => {
     fetchBloodBanks();
   }, []);
 
-  // filters 
+  // filters
   useEffect(() => {
     if (bloodBanks.length > 0) {
       const filtered = bloodBanks.filter(
@@ -73,7 +80,7 @@ const BloodBankAdminPage = () => {
       await addNewBloodBank(formData);
       setShowModal(false);
       resetForm();
-      fetchBloodBanks(); 
+      fetchBloodBanks();
     } catch (error) {
       console.error("Error adding blood bank:", error);
     }
@@ -91,16 +98,28 @@ const BloodBankAdminPage = () => {
     setCurrentId("");
   };
 
-  // Handle edit 
-  const handleEdit = (bank: any) => {
+  // Handle edit
+  const handleEdit = (id: string) => {
+    setEditMode(true);
+    setCurrentId(id);
+    router.push(`/admin/edit-blood-bank/${id}`);
   };
 
-
   const handleDelete = async (id: string) => {
-      try {
-      } catch (error) {
-        console.error("Error deleting blood bank:", error);
+    setDeleteLoading(true);
+    try {
+      const result = await deleteBloodBank(id);
+      if (result && !result.error) {
+        setBloodBanks(bloodBanks.filter((bank) => bank._id !== id));
+        setDeleteConfirm(null);
+      } else {
+        alert("Failed to delete blood bank");
       }
+    } catch (error) {
+      console.error("Error deleting blood bank:", error);
+    } finally {
+      setDeleteLoading(false);
+    }
   };
 
   //locations filtering
@@ -215,13 +234,13 @@ const BloodBankAdminPage = () => {
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       <div className="flex space-x-2">
                         <button
-                          onClick={() => handleEdit(bank)}
+                          onClick={() => handleEdit(bank._id)}
                           className="text-blue-600 hover:text-blue-800"
                         >
                           <Edit size={18} />
                         </button>
                         <button
-                          onClick={() => handleDelete(bank._id)}
+                          onClick={() => setDeleteConfirm(bank._id)}
                           className="text-red-600 hover:text-red-800"
                         >
                           <Trash2 size={18} />
@@ -236,12 +255,44 @@ const BloodBankAdminPage = () => {
         </div>
       </div>
 
-      {/* Modal - Add/Edit Blood Bank*/}
+      {/* Delete Confirmation Modal */}
+      {deleteConfirm && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-xl">
+            <h3 className="text-lg font-medium text-gray-900 mb-4">
+              Confirm Deletion
+            </h3>
+            <p className="text-gray-600 mb-6">
+              Are you sure you want to delete this blood bank? This action
+              cannot be undone.
+            </p>
+            <div className="flex justify-end space-x-3">
+              <button
+                onClick={() => setDeleteConfirm(null)}
+                className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded transition duration-200"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={() => deleteConfirm && handleDelete(deleteConfirm)}
+                className="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-4 rounded transition duration-200 flex items-center"
+              >
+                {deleteLoading ? (
+                  <span className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></span>
+                ) : null}
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal for Add/Edit Blood Bank */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
           <div className="bg-white rounded-lg p-6 w-full max-w-md">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold">
+              <h2 className="text-xl font-bold text-gray-800">
                 {editMode ? "Edit Blood Bank" : "Add New Blood Bank"}
               </h2>
               <button
@@ -320,7 +371,7 @@ const BloodBankAdminPage = () => {
                   className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
                 />
               </div>
-              <div className="flex justify-end space-x-2">
+              <div className="flex justify-end space-x-2 mt-6">
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}

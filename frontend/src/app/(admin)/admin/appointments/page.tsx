@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import AppointmentSkeleton from "../_components/skeletons/AppointmentSkeleton";
 import { getAllAppointments } from "../services/appointmentSerive";
+import { CheckCircle } from "lucide-react";
 
 // Appointment interfaces
 interface Appointment {
@@ -16,6 +17,7 @@ interface Appointment {
   location: string;
   donor: string;
   applicant: string;
+  status: string;
 }
 
 interface SortConfig {
@@ -317,7 +319,7 @@ export default function Appointments() {
                     scope="col"
                     className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider"
                   >
-                    Actions
+                    STATUS
                   </th>
                 </tr>
               </thead>
@@ -372,12 +374,9 @@ export default function Appointments() {
                       </div>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <button className="text-blue-600 hover:text-blue-900 mr-3">
-                        Edit
-                      </button>
-                      <button className="text-red-600 hover:text-red-900">
-                        Cancel
-                      </button>
+                      {appointment?.status == 'Accepted' ? <><CheckCircle className="text-green-500 mx-auto" /> Accepted</>
+                        :
+                        <><div className="text-red-400">{appointment?.status}</div></>}
                     </td>
                   </tr>
                 ))}

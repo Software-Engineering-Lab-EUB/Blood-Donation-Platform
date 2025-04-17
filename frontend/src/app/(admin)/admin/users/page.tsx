@@ -475,7 +475,7 @@ export default function Users() {
                         <Calendar className="w-4 h-4 text-gray-500" />
                         {user.dob?.day}/{user.dob?.month}/{user.dob?.year}
                         <span className="text-xs text-gray-500 ml-1">
-                          ({calculateAge(user.dob)} y)
+                          ({calculateAge(user.dob)})
                         </span>
                       </div>
                     </td>
@@ -503,14 +503,14 @@ export default function Users() {
                       {user.isSmoker ? (
                         <Cigarette className="text-red-500 mx-auto" />
                       ) : (
-                        <CheckCircle className="text-green-500 mx-auto" />
+                        <XCircle className="text-green-500 mx-auto" />
                       )}
                     </td>
                     <td className="p-3 border text-center">
                       {user.critical_disease ? (
                         <XCircle className="text-red-500 mx-auto" />
                       ) : (
-                        <CheckCircle className="text-green-500 mx-auto" />
+                        <XCircle className="text-green-500 mx-auto" />
                       )}
                     </td>
                     <td className="p-3 border text-center">
@@ -534,7 +534,7 @@ export default function Users() {
                       )}
                     </td>
                     <td className="p-3 border text-center">
-                      {user.isVerified ? (
+                      {user.isRegistered ? (
                         <CheckCircle className="text-green-500 mx-auto" />
                       ) : (
                         <XCircle className="text-red-500 mx-auto" />
@@ -551,7 +551,7 @@ export default function Users() {
                       {user.isBanned ? (
                         <Ban className="text-red-500 mx-auto" />
                       ) : (
-                        <CheckCircle className="text-green-500 mx-auto" />
+                        <XCircle className="text-green-500 mx-auto" />
                       )}
                     </td>
                     <td className="p-3 border text-center">
@@ -563,11 +563,6 @@ export default function Users() {
                         >
                           <Edit className="h-5 w-5" /> <span>Edit</span>
                         </Link>
-
-                        {/* Delete Button */}
-                        <button className="flex cursor-pointer items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all">
-                          <Trash2 className="h-5 w-5" /> <span>Delete</span>
-                        </button>
                       </div>
                     </td>
                   </tr>

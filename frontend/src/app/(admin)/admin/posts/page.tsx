@@ -292,9 +292,6 @@ export default function Posts() {
                 <th className="px-6 py-3 text-sm font-medium text-gray-600">
                   Contact Info
                 </th>
-                <th className="px-6 py-3 text-sm font-medium text-gray-600">
-                  Actions
-                </th>
               </tr>
             </thead>
             <tbody>
@@ -332,14 +329,6 @@ export default function Posts() {
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-800">
                       {post.contactInfo}
-                    </td>
-                    <td className="px-6 py-4 text-sm text-gray-800">
-                      <button
-                        className="text-red-500 hover:text-red-700 p-2 rounded-full hover:bg-red-50"
-                        onClick={() => handleDeletePost(post._id)}
-                      >
-                        <Trash2 className="w-5 h-5" />
-                      </button>
                     </td>
                   </tr>
                 ))
