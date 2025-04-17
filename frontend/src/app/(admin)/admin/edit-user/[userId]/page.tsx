@@ -19,7 +19,8 @@ import {
   MessageCircle,
   Bell,
 } from "lucide-react";
-import { getUserDetails } from "../../services/userService";
+import { getUserDetails, updateUserDetails } from "../../services/userService";
+
 
 //User Interface//
 interface UserData {
@@ -98,7 +99,6 @@ const EditUserProfile = () => {
     };
     fetchUserData();
   }, [userId]);
-  console.log(userId);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -135,13 +135,20 @@ const EditUserProfile = () => {
     setSuccessMessage(null);
 
     try {
-     //edit user logics 
-    } catch (error) {
-      console.error("Error updating user profile", error);
-      setError("An unexpected error occurred. Please try again later.");
-    } finally {
-      setIsLoading(false);
-    }
+       console.log('trying to update ' , userData);
+       const result = await updateUserDetails(userId as string, userData);
+       if (result && !result.error) {
+         setSuccessMessage("User profile updated successfully!");
+         router.push("/admin/users");
+       } else {
+         setError(result?.message || "Failed to update user profile");
+       }
+     } catch (error) {
+       console.error("Error updating user profile", error);
+       setError("An unexpected error occurred. Please try again later.");
+     } finally {
+       setIsLoading(false);
+     }
   };
 
   // Loading state UI

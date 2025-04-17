@@ -29,7 +29,6 @@ const Sidebar = () => {
     },
     { name: "Users", icon: <User />, path: "/admin/users" },
     { name: "Posts", icon: <FileText />, path: "/admin/posts" },
-    { name: "Donors", icon: <Heart />, path: "/admin/donors" },
     { name: "Appointments", icon: <Calendar />, path: "/admin/appointments" },
     { name: "Campaigns", icon: <Megaphone />, path: "/admin/campaigns" },
     { name: "Blood Banks", icon: <Droplet />, path: "/admin/blood-banks" },

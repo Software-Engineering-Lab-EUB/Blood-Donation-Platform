@@ -1,7 +1,5 @@
 import { serverBaseUrl } from "@/utils/serverUrl";
 
-
-
 //get all users list
 export const getAllUers = async () => {
   try {
@@ -32,3 +30,21 @@ export const getUserDetails = async (id: string) => {
     return null;
   }
 };
+
+//update user's details 
+export const updateUserDetails = async (id: string, data: any) => {
+  try {
+    const response = await fetch(`${serverBaseUrl}/admin/update-user/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type":"application/json",
+      },
+      body:JSON.stringify(data),
+    })
+    const result = await response.json();
+    return result;
+  }
+  catch (error) {
+    console.log(error);
+  }
+}
