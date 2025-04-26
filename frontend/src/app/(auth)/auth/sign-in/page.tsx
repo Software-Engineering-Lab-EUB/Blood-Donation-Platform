@@ -3,6 +3,7 @@
 import { AuthContext } from "@/context/AuthContext";
 import { getAdditionalUserInfo } from "firebase/auth";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 
@@ -119,8 +120,12 @@ export default function SignIn() {
             </span>
           </button>
 
+          <span className="flex justify-center items-center my-5 text-gray-600">
+            Are you admin? <Link className="btn ml-2 text-gray-700 border-2 border-gray-200 rounded-lg" href='/auth/admin-login'>Admin Sign In</Link>
+          </span>
+
           {/* Terms & Conditions */}
-          <div className="mt-10 text-center">
+          <div className="mt-5 text-center">
             <p className="text-base text-gray-500">
               By signing in, you agree to our{" "}
               <a href="#" className="text-red-600 hover:underline text-lg">

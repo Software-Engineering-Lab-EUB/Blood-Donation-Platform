@@ -6,7 +6,7 @@ import Link from "next/link";
 import Cookies from "js-cookie";
 import { createRoom } from "@/utils/chatRoomGenerate";
 import withAuth from "@/lib/hoc/withAuth";
-
+import { EyeOff } from "lucide-react";
 
 
 //user interface 
@@ -28,6 +28,7 @@ interface UserInfo {
   role: string;
   isAvailableForDonation: boolean;
   isPhoneNumberVisible: boolean;
+  notificationPreference: "Yes" | "No";
   isVerified: boolean;
   isBanned: boolean;
   isSmoker: boolean;
@@ -155,7 +156,10 @@ function UserProfile() {
 
                   <div className="mt-6 md:mt-0 flex space-x-3">
                     {userInfo.isAvailableForDonation && (
-                      <Link href={`/appointment/request/${userInfo?._id}`} className="bg-green-500 cursor-pointer text-white px-5 py-2.5 rounded-lg font-semibold text-sm shadow-md flex items-center">
+                      <Link
+                        href={`/appointment/request/${userInfo?._id}`}
+                        className="bg-green-500 cursor-pointer text-white px-5 py-2.5 rounded-lg font-semibold text-sm shadow-md flex items-center"
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-5 w-5 mr-2"
@@ -224,26 +228,32 @@ function UserProfile() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-gray-50 rounded-lg p-4 transition-all duration-300 hover:shadow-md">
                 <p className="text-sm text-gray-500 mb-1">Email</p>
-                <Link
-                  href={`mailto:${userInfo?.email}`}
-                  className="text-gray-800 font-medium flex items-center"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-4 w-4 mr-2 text-blue-600"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                    />
-                  </svg>
-                  {userInfo.email}
-                </Link>
+                {userInfo?.notificationPreference == "Yes" ? (
+                  <>
+                    <Link
+                      href={`mailto:${userInfo?.email}`}
+                      className="text-gray-800 font-medium flex items-center"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="h-4 w-4 mr-2 text-blue-600"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                        />
+                      </svg>
+                      {userInfo.email}
+                    </Link>
+                  </>
+                ) : (
+                  <><span className="flex items-center gap-2 text-gray-500"><EyeOff size={20}/><p>Hidden</p></span></>
+                )}
               </div>
               {userInfo.isPhoneNumberVisible && (
                 <div className="bg-gray-50 rounded-lg p-4 transition-all duration-300 hover:shadow-md">
@@ -587,6 +597,7 @@ function UserProfile() {
               </h2>
             </div>
             <div className="p-6">
+              {/* Posts content would go here */}
               <p className="text-gray-500">
                 This user has {userInfo.posts.length} posts
               </p>
