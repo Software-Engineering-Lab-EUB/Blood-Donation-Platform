@@ -8,11 +8,14 @@ const registerNewUser = async (payload: TUser) => {
   return result;
 };
 
-//get users by blood group 
+// Get users email by blood group
 const getUsersByBloodGroup = async (bloodGroup: string) => {
-  const result = await User.find({ blood_group: bloodGroup }, {email:1});
+  const result = await User.find(
+    { blood_group: bloodGroup, notificationPreference: "Yes" },
+    { email: 1 }
+  );
   return result;
-}
+};
 
 //get user info (self)
 const getUserInfo = async (email: string) => {
@@ -24,7 +27,6 @@ const getUserInfo = async (email: string) => {
 const viewUsersDetails = async (id: any) => {
   const result = await User.findById(id, {
     conversation: 0,
-    notificationPreference: 0,
   });
   return result;
 };
@@ -37,7 +39,9 @@ const getUsersDP = async (email: string) => {
 
 //update user info
 const updateUserInfo = async (id: any, payload: any) => {
-  const result = await User.findByIdAndUpdate({ _id: id }, payload,{new:true});
+  const result = await User.findByIdAndUpdate({ _id: id }, payload, {
+    new: true,
+  });
   console.log(result);
 };
 
@@ -50,7 +54,6 @@ const getUserChatLists = async (email: any) => {
   return result;
 };
 
-
 //get users _id using email
 const getUsersId = async (email: string) => {
   const result = await User.findOne({ email: email }, { _id: 1 });
@@ -61,11 +64,10 @@ const getUsersId = async (email: string) => {
 const getDonorsLists = async () => {
   const result = await User.find(
     { $or: [{ role: "Donor" }, { role: "Both" }] },
-    { conversation: 0, phone: 0, notificationPreference: 0 }
+    { conversation: 0, phone: 0 }
   );
   return result;
 };
-
 
 export const userServices = {
   registerNewUser,
