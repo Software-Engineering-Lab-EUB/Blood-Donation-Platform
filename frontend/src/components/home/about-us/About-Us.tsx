@@ -2,21 +2,21 @@ import React from "react";
 
 export default function AboutUs() {
   return (
-    <section className="py-16 bg-white">
-      <div className="container mx-auto px-6 max-w-7xl">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-red-600 mb-4">About Us</h2>
-          <div className="w-24 h-1 bg-red-600 mx-auto"></div>
+    <section className="py-8 sm:py-12 md:py-16 bg-white">
+      <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
+        <div className="text-center mb-8 sm:mb-12 md:mb-16">
+          <h2 className="text-3xl sm:text-4xl font-bold text-red-600 mb-4">About Us</h2>
+          <div className="w-16 sm:w-24 h-1 bg-red-600 mx-auto"></div>
         </div>
 
-        {/* Mission Statement - Wider layout */}
-        <div className="mb-16 max-w-5xl mx-auto">
-          <h3 className="text-2xl font-semibold text-gray-800 mb-6">
+        {/* Mission Statement - Responsive layout */}
+        <div className="mb-8 sm:mb-12 md:mb-16 max-w-5xl mx-auto">
+          <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-4 sm:mb-6 text-center md:text-left">
             Our Mission
           </h3>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-red-50 p-8 rounded-xl shadow-sm">
-              <p className="text-lg text-gray-700 leading-relaxed">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+            <div className="bg-red-50 p-5 sm:p-6 md:p-8 rounded-xl shadow-sm">
+              <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
                 At BloodConnect, we're dedicated to bridging the gap between
                 blood donors and those in need through a user-friendly platform.
                 Our mission is to ensure that no life is lost due to blood
@@ -24,8 +24,8 @@ export default function AboutUs() {
                 help at a moment's notice.
               </p>
             </div>
-            <div className="bg-red-50 p-8 rounded-xl shadow-sm">
-              <p className="text-lg text-gray-700 leading-relaxed">
+            <div className="bg-red-50 p-5 sm:p-6 md:p-8 rounded-xl shadow-sm">
+              <p className="text-base sm:text-lg text-gray-700 leading-relaxed">
                 Founded in 2025, we've grown from a small community initiative
                 to a nationwide network of compassionate individuals committed
                 to saving lives through blood donation. Together, we're making a
@@ -36,16 +36,16 @@ export default function AboutUs() {
           </div>
         </div>
 
-        {/* What We Do - 4 columns with new notification feature */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
+        {/* What We Do - Responsive grid */}
+        <div className="mb-8 sm:mb-12 md:mb-16">
+          <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-4 sm:mb-6 text-center">
             What We Do
           </h3>
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="bg-red-50 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-5 mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
+            <div className="bg-red-50 p-5 sm:p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-red-100 rounded-full flex items-center justify-center mb-4 sm:mb-5 mx-auto">
                 <svg
-                  className="w-8 h-8 text-red-600"
+                  className="w-6 h-6 sm:w-8 sm:h-8 text-red-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -59,19 +59,19 @@ export default function AboutUs() {
                   />
                 </svg>
               </div>
-              <h4 className="text-xl font-medium mb-3 text-center">
+              <h4 className="text-lg sm:text-xl font-medium mb-2 sm:mb-3 text-center">
                 Connect Donors
               </h4>
-              <p className="text-gray-600 text-center">
+              <p className="text-sm sm:text-base text-gray-600 text-center">
                 We help you find blood donors in your area based on blood type
                 and urgency with our advanced matching system.
               </p>
             </div>
 
-            <div className="bg-red-50 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-5 mx-auto">
+            <div className="bg-red-50 p-5 sm:p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-red-100 rounded-full flex items-center justify-center mb-4 sm:mb-5 mx-auto">
                 <svg
-                  className="w-8 h-8 text-red-600"
+                  className="w-6 h-6 sm:w-8 sm:h-8 text-red-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -85,19 +85,19 @@ export default function AboutUs() {
                   />
                 </svg>
               </div>
-              <h4 className="text-xl font-medium mb-3 text-center">
+              <h4 className="text-lg sm:text-xl font-medium mb-2 sm:mb-3 text-center">
                 Direct Communication
               </h4>
-              <p className="text-gray-600 text-center">
+              <p className="text-sm sm:text-base text-gray-600 text-center">
                 Our platform enables secure direct messaging between donors and
                 recipients, maintaining privacy while facilitating coordination.
               </p>
             </div>
 
-            <div className="bg-red-50 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-5 mx-auto">
+            <div className="bg-red-50 p-5 sm:p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-red-100 rounded-full flex items-center justify-center mb-4 sm:mb-5 mx-auto">
                 <svg
-                  className="w-8 h-8 text-red-600"
+                  className="w-6 h-6 sm:w-8 sm:h-8 text-red-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -111,19 +111,19 @@ export default function AboutUs() {
                   />
                 </svg>
               </div>
-              <h4 className="text-xl font-medium mb-3 text-center">
+              <h4 className="text-lg sm:text-xl font-medium mb-2 sm:mb-3 text-center">
                 Blood Request Notifications
               </h4>
-              <p className="text-gray-600 text-center">
+              <p className="text-sm sm:text-base text-gray-600 text-center">
                 Receive real-time alerts for urgent blood requests in your area,
                 allowing you to respond quickly to critical needs.
               </p>
             </div>
 
-            <div className="bg-red-50 p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-5 mx-auto">
+            <div className="bg-red-50 p-5 sm:p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+              <div className="w-14 h-14 sm:w-16 sm:h-16 bg-red-100 rounded-full flex items-center justify-center mb-4 sm:mb-5 mx-auto">
                 <svg
-                  className="w-8 h-8 text-red-600"
+                  className="w-6 h-6 sm:w-8 sm:h-8 text-red-600"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -137,10 +137,10 @@ export default function AboutUs() {
                   />
                 </svg>
               </div>
-              <h4 className="text-xl font-medium mb-3 text-center">
+              <h4 className="text-lg sm:text-xl font-medium mb-2 sm:mb-3 text-center">
                 Blood Bank Network
               </h4>
-              <p className="text-gray-600 text-center">
+              <p className="text-sm sm:text-base text-gray-600 text-center">
                 We partner with blood banks nationwide to ensure availability
                 during emergencies and maintain a reliable supply chain.
               </p>
@@ -148,44 +148,44 @@ export default function AboutUs() {
           </div>
         </div>
 
-        {/* Impact Section - Enhanced visuals */}
-        <div className="mb-16">
-          <h3 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
+        {/* Impact Section - Enhanced visibility with stronger contrast */}
+        <div id="our-impact" className="mb-8 sm:mb-12 md:mb-16">
+          <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-4 sm:mb-6 text-center">
             Our Impact
           </h3>
-          <div className="bg-gradient-to-r from-red-500 to-red-700 text-white p-10 rounded-xl shadow-lg">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
-                <div className="text-4xl font-bold mb-2">200+</div>
-                <p className="text-lg">Registered Donors</p>
+          <div className="bg-gradient-to-r from-red-600 to-red-800 text-white p-6 sm:p-8 md:p-10 rounded-xl shadow-lg">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 text-center">
+              <div className="bg-white/20 p-4 sm:p-6 rounded-lg backdrop-blur-sm">
+                <div className="text-3xl sm:text-4xl font-bold mb-1 sm:mb-2">200+</div>
+                <p className="text-base sm:text-lg">Registered Donors</p>
               </div>
-              <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
-                <div className="text-4xl font-bold mb-2">50+</div>
-                <p className="text-lg">Successful Donations</p>
+              <div className="bg-white/20 p-4 sm:p-6 rounded-lg backdrop-blur-sm">
+                <div className="text-3xl sm:text-4xl font-bold mb-1 sm:mb-2">50+</div>
+                <p className="text-base sm:text-lg">Successful Donations</p>
               </div>
-              <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
-                <div className="text-4xl font-bold mb-2">80+</div>
-                <p className="text-lg">Emergency Requests</p>
+              <div className="bg-white/20 p-4 sm:p-6 rounded-lg backdrop-blur-sm">
+                <div className="text-3xl sm:text-4xl font-bold mb-1 sm:mb-2">80+</div>
+                <p className="text-base sm:text-lg">Emergency Requests</p>
               </div>
-              <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
-                <div className="text-4xl font-bold mb-2">10+</div>
-                <p className="text-lg">Partner Blood Banks</p>
+              <div className="bg-white/20 p-4 sm:p-6 rounded-lg backdrop-blur-sm">
+                <div className="text-3xl sm:text-4xl font-bold mb-1 sm:mb-2">10+</div>
+                <p className="text-base sm:text-lg">Partner Blood Banks</p>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Contact Information - Better layout */}
+        {/* Contact Information - Responsive grid */}
         <div>
-          <h3 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
+          <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 mb-4 sm:mb-6 text-center">
             Contact Us
           </h3>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-gray-50 p-8 rounded-xl shadow-sm">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+            <div className="bg-gray-50 p-6 sm:p-8 rounded-xl shadow-sm">
               <div className="flex flex-col items-center">
-                <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-5">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-red-100 rounded-full flex items-center justify-center mb-4 sm:mb-5">
                   <svg
-                    className="w-8 h-8 text-red-600"
+                    className="w-6 h-6 sm:w-8 sm:h-8 text-red-600"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -205,8 +205,8 @@ export default function AboutUs() {
                     />
                   </svg>
                 </div>
-                <h4 className="text-xl font-medium mb-2">Address</h4>
-                <p className="text-gray-600 text-center">
+                <h4 className="text-lg sm:text-xl font-medium mb-2">Address</h4>
+                <p className="text-sm sm:text-base text-gray-600 text-center">
                   123 Health Avenue,
                   <br />
                   Medical District,
@@ -216,11 +216,11 @@ export default function AboutUs() {
               </div>
             </div>
 
-            <div className="bg-gray-50 p-8 rounded-xl shadow-sm">
+            <div className="bg-gray-50 p-6 sm:p-8 rounded-xl shadow-sm">
               <div className="flex flex-col items-center">
-                <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-5">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-red-100 rounded-full flex items-center justify-center mb-4 sm:mb-5">
                   <svg
-                    className="w-8 h-8 text-red-600"
+                    className="w-6 h-6 sm:w-8 sm:h-8 text-red-600"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -234,8 +234,8 @@ export default function AboutUs() {
                     />
                   </svg>
                 </div>
-                <h4 className="text-xl font-medium mb-2">Email</h4>
-                <p className="text-gray-600 text-center">
+                <h4 className="text-lg sm:text-xl font-medium mb-2">Email</h4>
+                <p className="text-sm sm:text-base text-gray-600 text-center">
                   info@bloodconnect.org
                   <br />
                   support@bloodconnect.org
@@ -243,11 +243,11 @@ export default function AboutUs() {
               </div>
             </div>
 
-            <div className="bg-gray-50 p-8 rounded-xl shadow-sm">
+            <div className="bg-gray-50 p-6 sm:p-8 rounded-xl shadow-sm sm:col-span-2 md:col-span-1">
               <div className="flex flex-col items-center">
-                <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-5">
+                <div className="w-14 h-14 sm:w-16 sm:h-16 bg-red-100 rounded-full flex items-center justify-center mb-4 sm:mb-5">
                   <svg
-                    className="w-8 h-8 text-red-600"
+                    className="w-6 h-6 sm:w-8 sm:h-8 text-red-600"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -261,8 +261,8 @@ export default function AboutUs() {
                     />
                   </svg>
                 </div>
-                <h4 className="text-xl font-medium mb-2">Phone</h4>
-                <p className="text-gray-600 text-center">
+                <h4 className="text-lg sm:text-xl font-medium mb-2">Phone</h4>
+                <p className="text-sm sm:text-base text-gray-600 text-center">
                   +1 (555) 123-4567
                   <br />
                   Emergency: +1 (555) 987-6543

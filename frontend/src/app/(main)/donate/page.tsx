@@ -167,9 +167,10 @@ function Donate() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-3xl font-bold text-center mb-8">
-        Donate Blood & Save Lives
-      </h1>
+     <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-center mb-8">
+  Donate Blood & Save Lives
+</h1>
+
 
       {/* Hero section */}
       <div className="bg-red-50 rounded-lg p-6 mb-8 text-center">
