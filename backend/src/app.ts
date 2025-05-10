@@ -8,6 +8,7 @@ import { conversationRoutes } from "./app/modules/conversation/conversation.rout
 import { adminRoutes } from "./app/modules/admin/admin.route";
 import { appointmentRoutes } from "./app/modules/appointment/appointment.route";
 import { bloodBankRoutes } from "./app/modules/blood-banks/blood-bank.route";
+import { campaignRoutes } from "./app/modules/campaign/campaign.route";
 
 const app: Application = express();
 
@@ -170,6 +171,7 @@ app.use("/api/conversation", conversationRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/appointment", appointmentRoutes);
 app.use("/api/blood-banks", bloodBankRoutes);
+app.use("/api/campaigns", campaignRoutes);
 
 // Default route
 app.get("/", (req: Request, res: Response) => {

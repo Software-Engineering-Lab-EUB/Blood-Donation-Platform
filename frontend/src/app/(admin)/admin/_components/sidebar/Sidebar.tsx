@@ -3,13 +3,14 @@ import { useState } from "react";
 import {
   User,
   FileText,
-  Heart,
   Calendar,
   Megaphone,
   Droplet,
   Menu,
   Settings,
+  LogOut,
 } from "lucide-react";
+import Cookies from "js-cookie";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -20,6 +21,11 @@ const Sidebar = () => {
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
+
+  const handleLogOut = () => {
+    Cookies.remove('admin');
+    window.location.replace('/home');
+  }
 
   const menuItems = [
     {
@@ -59,6 +65,12 @@ const Sidebar = () => {
               </Link>
             </li>
           ))}
+          <li>
+            <button onClick={handleLogOut} className="ml-3 mt-4 flex items-center gap-2 hover:text-red-500 cursor-pointer">
+              <LogOut size={20} />
+              <span>Logout</span>
+            </button>
+          </li>
         </ul>
       </nav>
     </div>
