@@ -169,9 +169,10 @@ export default function Search() {
     <div className="container mx-auto px-4 py-10 bg-gray-50 min-h-screen">
       {/* Header with Title and Description */}
       <div className="mb-8 text-center">
-        <h1 className="text-4xl font-bold mb-3 text-gray-800">
-          Blood Donor Directory
-        </h1>
+       <h1 className="text-2xl md:text-4xl lg:text-5xl font-bold mb-3 text-gray-800">
+  Blood Donor Directory
+</h1>
+
         <p className="text-gray-600 max-w-2xl mx-auto">
           Find compatible blood donors quickly and easily. Use filters to narrow
           your search and connect directly with potential donors.
@@ -180,27 +181,27 @@ export default function Search() {
 
       {/* Search and Filter Box */}
       <div className="mb-8 bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-        <div className="flex flex-col md:flex-row gap-4 items-center">
-          <div className="relative flex-1 w-full">
-            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <SearchIcon className="h-5 w-5 text-gray-400" />
-            </div>
-            <input
-              type="text"
-              placeholder="Search by name, location, or blood group"
-              className="pl-12 pr-4 py-3.5 w-full border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 text-gray-700"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-          </div>
-          <button
-            onClick={() => setIsFilterOpen(!isFilterOpen)}
-            className="flex items-center justify-center gap-2 bg-red-600 text-white px-6 py-3.5 rounded-lg hover:bg-red-700 transition font-medium min-w-[120px]"
-          >
-            <Filter className="h-5 w-5" />
-            {isFilterOpen ? "Hide Filters" : "Filters"}
-          </button>
-        </div>
+        <div className="flex flex-wrap gap-4 items-center">
+  <div className="relative flex-grow min-w-[240px]">
+    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+      <SearchIcon className="h-5 w-5 text-gray-400" />
+    </div>
+    <input
+      type="text"
+      placeholder="Search by name, location, or blood group"
+      className="pl-12 pr-4 py-3.5 w-full border rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500 text-gray-700"
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+    />
+  </div>
+  <button
+    onClick={() => setIsFilterOpen(!isFilterOpen)}
+    className="flex items-center justify-center gap-2 bg-red-600 text-white px-6 py-3.5 rounded-lg hover:bg-red-700 transition font-medium min-w-[120px]"
+  >
+    <Filter className="h-5 w-5" />
+    {isFilterOpen ? "Hide Filters" : "Filters"}
+  </button>
+</div>
 
         {isFilterOpen && (
           <div className="mt-6 p-6 bg-gray-50 rounded-lg border border-gray-200">

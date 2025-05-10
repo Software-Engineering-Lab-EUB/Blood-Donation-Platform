@@ -137,9 +137,10 @@ function ViewAppointments() {
   if (isLoading) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold text-red-700 mb-6">
-          Blood Donation Appointments
-        </h1>
+        <h1 className="text-xl md:text-4xl lg:text-5xl md:font-bold text-red-700 mb-6">
+  Blood Donation Appointments
+</h1>
+
         <div className="bg-white rounded-lg shadow-md p-8 text-center">
           <div className="flex justify-center items-center">
             <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-red-700"></div>

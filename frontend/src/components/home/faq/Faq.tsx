@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 
-
 type FAQItem = {
   question: string;
   answer: string;
@@ -74,31 +73,33 @@ export default function FAQ() {
   ];
 
   return (
-    <section className="py-12 bg-white">
-      <div className="container mx-auto px-4">
+    <section className="py-6 sm:py-8 md:py-12 bg-white">
+      <div className="container mx-auto px-4 sm:px-6">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-red-600 mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-center text-red-600 mb-4 sm:mb-6 md:mb-8">
             Frequently Asked Questions
           </h2>
-          <p className="text-gray-600 text-center mb-8">
+          <p className="text-sm sm:text-base text-gray-600 text-center mb-6 sm:mb-8">
             Find answers to common questions about blood donation, eligibility,
             and our platform.
           </p>
 
           {/* FAQ Accordion */}
-          <div className="space-y-4">
+          <div className="space-y-2 sm:space-y-3 md:space-y-4">
             {faqItems.map((item, index) => (
               <div
                 key={index}
                 className="border border-gray-200 rounded-lg overflow-hidden"
               >
                 <button
-                  className="flex justify-between items-center w-full px-6 py-4 text-left font-medium text-gray-800 hover:bg-gray-50 focus:outline-none"
+                  className="flex justify-between items-center w-full px-3 sm:px-4 md:px-6 py-3 sm:py-4 text-left text-sm sm:text-base font-medium text-gray-800 hover:bg-gray-50 focus:outline-none"
                   onClick={() => toggleFAQ(index)}
+                  aria-expanded={openIndex === index}
+                  aria-controls={`faq-answer-${index}`}
                 >
-                  <span>{item.question}</span>
+                  <span className="pr-2">{item.question}</span>
                   <svg
-                    className={`w-5 h-5 text-red-600 transform ${
+                    className={`flex-shrink-0 w-4 h-4 sm:w-5 sm:h-5 text-red-600 transform ${
                       openIndex === index ? "rotate-180" : ""
                     } transition-transform duration-200`}
                     fill="none"
@@ -115,7 +116,8 @@ export default function FAQ() {
                   </svg>
                 </button>
                 <div
-                  className={`px-6 py-4 bg-gray-50 text-gray-600 ${
+                  id={`faq-answer-${index}`}
+                  className={`px-3 sm:px-4 md:px-6 py-3 sm:py-4 bg-gray-50 text-xs sm:text-sm md:text-base text-gray-600 ${
                     openIndex === index ? "block" : "hidden"
                   }`}
                 >
@@ -126,15 +128,15 @@ export default function FAQ() {
           </div>
 
           {/* Additional Help */}
-          <div className="mt-12 bg-red-50 p-6 rounded-lg text-center">
-            <h3 className="text-xl font-semibold mb-3">
+          <div className="mt-8 sm:mt-10 md:mt-12 bg-red-50 p-4 sm:p-5 md:p-6 rounded-lg text-center">
+            <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">
               Still have questions?
             </h3>
-            <p className="text-gray-600 mb-4">
+            <p className="text-xs sm:text-sm md:text-base text-gray-600 mb-3 sm:mb-4">
               Our team is here to help with any additional questions about blood
               donation.
             </p>
-            <button className="bg-red-600 hover:bg-red-700 text-white font-medium py-2 px-6 rounded-lg transition duration-300">
+            <button className="bg-red-600 hover:bg-red-700 text-white text-sm sm:text-base font-medium py-2 px-4 sm:px-6 rounded-lg transition duration-300">
               Contact Us
             </button>
           </div>
