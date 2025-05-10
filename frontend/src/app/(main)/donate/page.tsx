@@ -1,10 +1,7 @@
-"use client";
 
+"use client";
 import React, { useState, useEffect } from "react";
-import {
-  getBloodBanksList,
-  getAllBloodRequestsPosts,
-} from "@/service/bloodService";
+
 import {
   MapPin,
   Phone,
@@ -15,12 +12,16 @@ import {
   Search,
   Filter,
   X,
+  CalendarDays,
+  Globe,
 } from "lucide-react";
 import Link from "next/link";
 import Cookies from "js-cookie";
 import withAuth from "@/lib/hoc/withAuth";
+import { getAllBloodRequestsPosts, getBloodBanksList } from "@/service/bloodService";
+import { getCampaignsList } from "@/service/campaignService";
 
-//  types 
+//  types
 interface BloodBank {
   _id: string;
   name: string;
@@ -42,11 +43,25 @@ interface Post {
   notes?: string;
 }
 
+interface Campaign {
+  _id?: string;
+  title: string;
+  host: string;
+  date: string;
+  location: string;
+  start_time: string;
+  contactNumber: string;
+  isDeleted?: boolean;
+}
+
 function Donate() {
   const [bloodBanks, setBloodBanks] = useState<BloodBank[]>([]);
   const [posts, setPosts] = useState<Post[]>([]);
+  const [campaigns, setCampaigns] = useState<Campaign[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<"banks" | "requests">("banks");
+  const [activeTab, setActiveTab] = useState<
+    "banks" | "requests" | "campaigns"
+  >("banks");
   const [searchTerm, setSearchTerm] = useState("");
   const [bloodGroupFilter, setBloodGroupFilter] = useState("");
   const [locationFilter, setLocationFilter] = useState("");
@@ -56,12 +71,14 @@ function Donate() {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const [banksData, postsData] = await Promise.all([
+        const [banksData, postsData, campaignsData] = await Promise.all([
           getBloodBanksList(),
           getAllBloodRequestsPosts(),
+          getCampaignsList(),
         ]);
         setBloodBanks(banksData || []);
         setPosts(postsData || []);
+        setCampaigns(campaignsData || []);
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -81,25 +98,45 @@ function Donate() {
   );
 
   const filteredPosts = posts
-  .filter(
-    (post) =>
-      (post.patientName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        post.location.toLowerCase().includes(searchTerm.toLowerCase())) &&
-      (bloodGroupFilter === "" || post.bloodGroup === bloodGroupFilter) &&
-      (locationFilter === "" ||
-        post.location.toLowerCase().includes(locationFilter.toLowerCase()))
-  )
-  .sort((a, b) => {
-    const dateA = new Date(a.dateNeeded);
-    const dateB = new Date(b.dateNeeded);
-    return dateB.getTime() - dateA.getTime(); 
-  });
+    .filter(
+      (post) =>
+        (post.patientName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          post.location.toLowerCase().includes(searchTerm.toLowerCase())) &&
+        (bloodGroupFilter === "" || post.bloodGroup === bloodGroupFilter) &&
+        (locationFilter === "" ||
+          post.location.toLowerCase().includes(locationFilter.toLowerCase()))
+    )
+    .sort((a, b) => {
+      const dateA = new Date(a.dateNeeded);
+      const dateB = new Date(b.dateNeeded);
+      return dateB.getTime() - dateA.getTime();
+    });
 
-  //  locations  filter 
+  const filteredCampaigns = campaigns
+    .filter(
+      (campaign) =>
+        (campaign.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          campaign.host.toLowerCase().includes(searchTerm.toLowerCase())) &&
+        (locationFilter === "" ||
+          campaign.location
+            .toLowerCase()
+            .includes(locationFilter.toLowerCase())) &&
+        !campaign.isDeleted
+    )
+    .sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      return dateA.getTime() - dateB.getTime();
+    });
+
+  //  locations filter
   const uniqueLocations = [
     ...new Set([
       ...bloodBanks.map((bank) => bank.location),
       ...posts.map((post) => post.location),
+      ...campaigns
+        .filter((campaign) => !campaign.isDeleted)
+        .map((campaign) => campaign.location),
     ]),
   ];
 
@@ -113,6 +150,21 @@ function Donate() {
     });
   };
 
+  const getCampaignStatus = (campaignDate: string) => {
+    const today = new Date();
+    const date = new Date(campaignDate);
+
+    today.setHours(0, 0, 0, 0);
+    date.setHours(0, 0, 0, 0);
+
+    if (date.getTime() === today.getTime()) {
+      return { label: "Today", class: "bg-green-100 text-green-800" };
+    } else if (date > today) {
+      return { label: "Upcoming", class: "bg-blue-100 text-blue-800" };
+    } else {
+      return { label: "Past", class: "bg-gray-100 text-gray-800" };
+    }
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -137,6 +189,17 @@ function Donate() {
             <div className="text-left">
               <p className="font-semibold">Find Nearby</p>
               <p className="text-sm text-gray-600">Blood banks in your area</p>
+            </div>
+          </div>
+          <div className="bg-white p-4 rounded-lg shadow-md flex items-center gap-3">
+            <div className="bg-red-100 p-2 rounded-full">
+              <CalendarDays className="text-red-600" size={20} />
+            </div>
+            <div className="text-left">
+              <p className="font-semibold">Join Campaigns</p>
+              <p className="text-sm text-gray-600">
+                Participate in donation events
+              </p>
             </div>
           </div>
           <div className="bg-white p-4 rounded-lg shadow-md flex items-center gap-3">
@@ -172,6 +235,16 @@ function Donate() {
           onClick={() => setActiveTab("requests")}
         >
           Blood Requests
+        </button>
+        <button
+          className={`px-4 py-2 font-medium ${
+            activeTab === "campaigns"
+              ? "text-red-600 border-b-2 border-red-600"
+              : "text-gray-600"
+          }`}
+          onClick={() => setActiveTab("campaigns")}
+        >
+          Campaigns
         </button>
       </div>
 
@@ -223,6 +296,7 @@ function Donate() {
             ))}
           </select>
         )}
+
       </div>
 
       {/* Loading state */}
@@ -343,6 +417,71 @@ function Donate() {
                           </Link>
                         </div>
                       )}
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          )}
+
+          {/* Campaigns List */}
+          {activeTab === "campaigns" && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {filteredCampaigns.length === 0 ? (
+                <div className="col-span-full text-center py-12 text-gray-500">
+                  No campaigns found matching your search.
+                </div>
+              ) : (
+                filteredCampaigns.map((campaign) => (
+                  <div
+                    key={campaign._id}
+                    className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow"
+                  >
+                    <div className="bg-red-50 p-3 flex justify-between items-center">
+                      <div>
+                        <h3 className="font-semibold">{campaign.title}</h3>
+                        <p className="text-sm text-gray-600">
+                          By: {campaign.host}
+                        </p>
+                      </div>
+                      <div
+                        className={`px-3 py-1 rounded-full text-xs font-medium ${
+                          getCampaignStatus(campaign.date).class
+                        }`}
+                      >
+                        {getCampaignStatus(campaign.date).label}
+                      </div>
+                    </div>
+                    <div className="p-5">
+                      <div className="flex items-center gap-2 text-gray-600 mb-2">
+                        <MapPin size={16} />
+                        <span>{campaign.location}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-gray-600 mb-2">
+                        <Phone size={16} />
+                        <a
+                          href={`tel:${campaign.contactNumber}`}
+                          className="hover:text-red-600"
+                        >
+                          {campaign.contactNumber}
+                        </a>
+                      </div>
+                      <div className="flex items-center gap-2 text-gray-600 mb-2">
+                        <Calendar size={16} />
+                        <span>{formatDate(campaign.date)}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-gray-600 mb-2">
+                        <Clock size={16} />
+                        <span>Starts at: {campaign.start_time}</span>
+                      </div>
+                      <div className="flex gap-2 mt-4">
+                        <button className="flex-1 bg-red-600 text-white py-2 rounded-md hover:bg-red-700 transition-colors">
+                          Register
+                        </button>
+                        <button className="flex-1 bg-white border border-red-600 text-red-600 py-2 rounded-md hover:bg-red-50 transition-colors">
+                          Details
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ))
